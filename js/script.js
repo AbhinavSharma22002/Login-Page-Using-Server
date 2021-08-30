@@ -77,7 +77,7 @@ dc.submit1 = function(a,b) {
       function(homeHtml){
         var temp1 = getState(cat);
         if(temp1!="-999"&& temp1!="-09")
-        homeHtml=homeHtml.replace(new RegExp("{{data}}","g"),"Dear "+temp1+"!! This is a project page on which we are working!!");
+        homeHtml=homeHtml.replace(new RegExp("{{data}}","g"),"Dear "+temp1.username+"!! This is a project page on which we are working!! By the way, your email id which is "+temp1.email+".");
         else if(temp1=="-09"){
         alert("Entered Wrong Password. Please try again!!");
         dc.buildAndShowHomeHTML();
@@ -96,7 +96,7 @@ dc.submit1 = function(a,b) {
     for(var x in data){
       if(data[x].username && data[x].username.split(",").indexOf(usr.toString())!=-1) {
         if(data[x].password && data[x].password.split(",").indexOf(pas.toString())!=-1) {
-          return data[x].username;
+          return data[x];
         }
         else{
           return "-09";

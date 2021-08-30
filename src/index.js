@@ -212,8 +212,12 @@ app.post('/process_pos', function (req, res) {
   const new_fortunes = fortunes.concat(latset);
 
   writeFortunes(new_fortunes);
-  res.send("<script>alert(`Your request has been successfully done! Kindly Login to proceed.`);</script>");
-  res.end();
+  fs.readFile(__dirname+'/../snippet/process_pos.html', function (err, data) {
+    if(err) console.log(err);
+    res.writeHead(200,{'Content-Type':'text/html'});
+    res.write(data);
+    res.end();
+  });
 });
 
 module.exports = app;
