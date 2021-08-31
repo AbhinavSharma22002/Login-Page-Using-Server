@@ -105,30 +105,6 @@ dc.submit1 = function(a,b) {
     }
     return "-999";
   }
-
-
-  dc.submit2 = function(a,b,c) {
-    showLoading("#main-content");
-    usr=a.value;
-    pas=b.value;
-    ema=c.value;
-
-    $ajaxUtils.sendGetRequest1(
-      homeu,
-      function(homeHtml){
-       // searchandshow2();
-        dc.buildAndShowHomeHTML2();
-        homeHtml=homeHtml.replace(new RegExp("{{data}}","g"),"Dear "+usr+"!! This is a project page on which we are working!!");
-        insertHtml('#main-content', homeHtml);
-      },
-      false
-    );
-    };
-
-
-    function searchandshow2(){
-
-    }
   
 
 dc.buildAndShowHomeHTML=function(){

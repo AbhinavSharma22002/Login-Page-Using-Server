@@ -1,7 +1,7 @@
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
-const fortunes = require('../data/fortunes');
+const fortunes = require(__dirname+'/../data/fortunes.json');
 
 const app = express();
 
@@ -90,7 +90,8 @@ app.get('/images/ajax-loader.gif', (req,res)=>{
 app.get('/data/fortunes.json', (req,res)=>{
   fs.readFile(__dirname+'/../data/fortunes.json', 'utf-8', (err, data) => {
     if (err) throw err;
-    res.jsonData = JSON.parse(data);
+    req.responseText=JSON.parse(data);
+    res.write(data);
     res.end();
   });
 });
@@ -196,26 +197,23 @@ app.get('/ABOUT.html', (req, res) => {
     res.end();
   });
 });
-/*
+
 const writeFortunes = json => {
-  fs.writeFile('../data/fortunes.json', JSON.stringify(json), err => console.log(err));
+  fs.writeFile(__dirname+'/../data/fortunes.json', JSON.stringify(json), err => console.log(err));
 };
 
-app.post('/SIGN#', (req, res) => {
+app.post('/process_pos', function (req, res) {  
+   var username = req.body.form1[0];
+   var password = req.body.form1[1];
+   var email = req.body.form1[2];
+   var latset= {"username":username,"password":password,"email":email};
+  const fortune_ids = fortunes.map(f => f.username);
 
-  const { username , password, email } = req.body;
-
-  const fortune_ids = fortunes.map(f => f.id);
-
-  const new_fortunes = fortunes.concat({
-    id: (fortune_ids.length > 0 ? Math.max(...fortune_ids) : 0) + 1,
-    username,
-    password,
-    email
-  });
+  const new_fortunes = fortunes.concat(latset);
 
   writeFortunes(new_fortunes);
-  res.json(new_fortunes);
+  res.send("<script>alert(`Your request has been successfully done! Kindly Login to proceed.`);</script>");
+  res.end();
 });
-*/
+
 module.exports = app;

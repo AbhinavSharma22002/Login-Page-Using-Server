@@ -25,24 +25,11 @@ ajaxUtils.sendGetRequest1 =
                        responseHandler,
                        isJsonResponse); 
       };
-    request.open("GET", requestUrl,true);
+    request.open("GET", requestUrl);
     request.send('null');// for POST only
   };
-// Makes an Ajax GET request to 'requestUrl' for adding
-ajaxUtils.sendpostRequest2 = 
-  function(requestUrl,responseHandler, isJsonResponse) {
-    var request =getRequestObject();
 
-    request.onreadystatechange = 
-      function() { 
-        handleResponse(request, 
-                       responseHandler,
-                       isJsonResponse); 
-      };
-    request.open("GET", requestUrl, true);
-    request.send('null'); // for POST only*/
-  };
-
+  
 // Only calls user provided 'responseHandler'
 // function if response is ready
 // and not an error
@@ -56,7 +43,6 @@ function handleResponse(request,
     if (isJsonResponse == undefined) {
       isJsonResponse = true;
     }
-
     if (isJsonResponse) {
       responseHandler(JSON.parse(request.responseText));
     }
