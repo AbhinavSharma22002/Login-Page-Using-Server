@@ -105,8 +105,11 @@ dc.submit1 = function(a,b) {
     }
     return "-999";
   }
+  var arrOpenedDivs= document.querySelectorAll(".show");
+  for (i = 0; i < arrOpenedDivs.length; i++) {
+      arrOpenedDivs[i].classList.remove('show');
+  } 
   
-
 dc.buildAndShowHomeHTML=function(){
   showLoading("#main-content");
     switchactive("#navHomeButton");
