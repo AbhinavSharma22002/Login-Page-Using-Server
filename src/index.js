@@ -1,6 +1,5 @@
 const fs = require('fs');
 const express = require('express');
-const bodyParser = require('body-parser');
 const fortunes = require(__dirname+'/../data/fortunes.json');
 
 const app = express();
@@ -124,16 +123,6 @@ app.get('/fonts/glyphicons-halflings-regular.ttf', (req,res)=>{
 });
 
 
-app.get('/favicon.ico', (req,res)=>{
-  fs.readFile(__dirname+'/../images/x-icon.ico',function(err,data){
-    if(err) console.log(err);
-    res.writeHead(200,{'Content-Type':'image/jpg'});
-    res.write(data);
-    res.end();
-  });
-});
-
-
 app.get('/snippet/home-snippet.html', (req,res)=>{
   fs.readFile(__dirname+'/../snippet/home-snippet.html',function(err,data){
     if(err) console.log(err);
@@ -188,6 +177,16 @@ app.get('/SIGN.html', (req, res) => {
     res.end();
   });
 });
+
+app.get('/images/img3.jpg', (req,res)=>{
+  fs.readFile(__dirname+'/../images/img3.jpg',function(err,data){
+    if(err) console.log(err);
+    res.writeHead(200,{'Content-Type':'image/jpg'});
+    res.write(data);
+    res.end();
+  });
+});
+
 
 app.get('/ABOUT.html', (req, res) => {
   fs.readFile(__dirname+'/../ABOUT.html', function (err, data) {

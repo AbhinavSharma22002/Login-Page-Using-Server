@@ -51,13 +51,6 @@ var switchactive = function(a) {
   document.querySelector(a).className="active";
 };
 
-var reminder = function(nam,text){
-  var c=document.querySelector("#main-content");
-  console.log(c);
-  text = text.
-  console.log(text);
-};
-
 var usr;
 var pas;
 var ema;

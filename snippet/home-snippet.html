@@ -1,23 +1,24 @@
-    <div class="jumbotron">
-      <div class="headbox text-center">Log In</div>
-      <div class="content">
-      <form>
-        <div class=".flex-container">
-        <div class="text-center .col-lg-1 .col-sm-1 .col-md-1">
-        <label for="u">User</label>
-        <input type="text" id="u1" name="form1">
-        </div>
-        <br>
-        <div class="text-center .col-md-1 .col-lg-1 .col-sm-1">
-        <label for="p">Password</label>
-        <input type="password" id="u2" name="form1">
-      </div>
-    </div>
-      <div class="container">
-      <div class="text-center cc">
-      <input type="submit" value="Enter" onclick="$dc.submit1(document.getElementById('u1'),document.getElementById('u2'))">
-    </div>
-  </div>
-      </form>
-    </div>
-  </div>
+<div class="jumbotron">
+  <div class="headbox text-center">Log In</div>
+  <div class="content">
+    <form>
+<table align=center cellspacing=10>
+<tr>
+<td><input type="text" id="u1" style="color: #000000; border-radius: 4px;font-weight: 700;" aria-label="User" placeholder="User" required></td>
+</tr>
+
+<tr>
+<td><input type="password" id="u2" style="color: #000000; border-radius: 4px;font-weight: 700;" aria-label="Password" placeholder="Password" required></td>
+</tr>
+
+</table>
+<div align="center">
+<button data-element="submit" style="display:inline-block; color: #fff; background-color:#000000; border-radius: 5px; font-weight: 700;" onclick="$dc.submit1(document.getElementById('u1'),document.getElementById('u2'))">
+<span>Enter</span>
+</button>
+</div>
+</form>
+</div>
+
+</div>
+</div>

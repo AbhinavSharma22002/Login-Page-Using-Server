@@ -1,65 +1,62 @@
 *{
 	box-sizing: border-box;
 }
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+
+body{
+	background-image: url("../images/img3.jpg");
+	 height: 100%;
+	 background-position: center;
+	 background-repeat: no-repeat;
+	 background-size: cover;
 }
+#navHomeButton{
+	cursor: pointer;
+}
+#navaboutButton{
+	cursor: pointer;
+}
+#navMenuButton{
+	cursor: pointer;
+}
+#main-content{
+	padding-top: 150px;
+	padding-bottom: 150px;
+}
+.panel-footer {
+	clear: both;
+    position: relative;
+    height: auto;
+  }
+
+  #header-nav{
+	clear: both;
+    position: relative;
+    height: 110px;
+  }
 
 @media (max-width: 767px){
 	h1{
 		margin-left: 20px;
-	}
-	#header-nav{
-		padding-bottom: 30px;
 	}
 	#navbarToggle{
 		margin-top: 20px;
 	}
 }
 	@media(min-width: 992px){
-.col-lg-1{
-	width: 49%;
-	margin-left: 10px;
-	float: left;
-}
-input{
-	size: 70px;
-}
+
 
 .cc>button{
 	font-size: 30px;
 }
-.col-lg-2{
-	width: 49%;
-	margin-left: 10px;
-	float: left;
-}
-}@media(max-width: 991px) and (min-width: 768px){
-.col-md-1{
-	width: 48.0%;
-	margin-left: 10px;
-	float: left;
-}
-input{
-	size: 50px;
-}
-.col-md-2{
-	width: 48.0%;
-	float: left;
+
 }
 
+@media(max-width: 991px) and (min-width: 768px){
 .cc>button{
 	font-size: 25px;
 }
 }
 @media(max-width: 767px){
-.col-sm-1{
-	width: 97.3%;
-	margin-left: 10px;
-	float: left;
-}
 
 .cc>button{
 	font-size: 20px;
@@ -67,33 +64,82 @@ input{
 input{
 	size: 10px;
 }
-.col-sm-2{
-	margin-left: 10px;
-	width: 97.3%;
-	float: left;
 }
-}
-body{
-	background-color: hotpink;
-}
+
 h1{
 	margin-top: 10px;
 }
 .headbox{
 	font-size: 50px;
-	color: blue;
 }
+
 .jumbotron{
-	margin: 30px;
-	border-width: 10px;
-	height:500px;
+	vertical-align: middle;
+	height:400px;
+	width: 100%;
+	background-image: radial-gradient(wheat,white);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
+li:hover
+{
+    background-color: white;
+}
+
 .container{
-	margin-top: 40px;
-}
-.content{
 	margin-top: 40px;
 }
 .cc{
 	text-align: center;
+}
+input[type= "submit"]{
+	margin-top: 20px;
+}
+td{
+	padding:  7px;
+}
+
+table td
+{
+ font-size:20px;
+}
+table th
+{
+ visibility:hidden;
+ display:none;
+}
+input
+{
+ width:200px;
+ height:35px;
+ border:1px solid silver;
+ border-radius:3px;
+ font-size:17px;
+ padding:5px;
+}
+@media (max-width:610px)
+{
+
+table
+{
+ width:100%;
+}
+table .column1
+{
+ visibility:hidden;
+ display:none;
+}
+table th
+{
+ visibility:visible;
+ display:block;
+ font-size:20px;
+}
+input
+{
+ width:80%;
+ margin-left:10%;
+ margin-right: 10%;
+}
 }
