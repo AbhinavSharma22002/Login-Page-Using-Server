@@ -1,6 +1,6 @@
 $(function () { 
   $("#navbarToggle").blur(function (event) {
-    var screenWidth = window.innerWidth;
+    let screenWidth = window.innerWidth;
     if (screenWidth < 768) {
       $("#collapsable-nav").collapse('hide');
     }
@@ -9,30 +9,31 @@ $(function () {
 
 (function (global) {
 
-var dc = {};
-var homeHtmlUrl = "../snippet/home-snippet.html";
-var homeHtmlUrl2 = "../snippet/home-snippet-2.html";
-var homeHtmlUrl3 = "../snippet/home-snippet-3.html";
-var homeu="../snippet/home.html";
-var data="../data/fortunes.json";
+let dc = {};
+let homeHtmlUrl = "../snippet/home-snippet.html";
+let homeHtmlUrl2 = "../snippet/home-snippet-2.html";
+let homeHtmlUrl3 = "../snippet/home-snippet-3.html";
+let homeHtmlUrl4 = "../snippet/process.html";
+let homeu="../snippet/home.html";
+let data="../data/fortunes.json";
 
-var insertHtml = function (selector, html) {
-  var targetElem = document.querySelector(selector);
+let insertHtml = function (selector, html) {
+  let targetElem = document.querySelector(selector);
   targetElem.innerHTML = html;
 };
 
-var showLoading = function (selector) {
-  var html = "<div class='text-center'>";
+let showLoading = function (selector) {
+  let html = "<div class='text-center'>";
   html += "<img src='images/ajax-loader.gif'></div>";
   insertHtml(selector, html);
 };
 
 
-var switchactive = function(a) {
-  var one = "#navHomeButton";
-  var two = "#navMenuButton";
-  var three = "#navaboutButton";
-  var check ="";
+let switchactive = function(a) {
+  let one = "#navHomeButton";
+  let two = "#navMenuButton";
+  let three = "#navaboutButton";
+  let check ="";
     if(one!=a){
     check = document.querySelector(one).className;
     check = check.replace(new RegExp("active", "g"), "");
@@ -51,9 +52,9 @@ var switchactive = function(a) {
   document.querySelector(a).className="active";
 };
 
-var usr;
-var pas;
-var ema;
+let usr;
+let pas;
+let ema;
 dc.submit1 = function(a,b) {
   showLoading("#main-content");
   usr=a.value;
@@ -68,7 +69,7 @@ dc.submit1 = function(a,b) {
     $ajaxUtils.sendGetRequest1(
       homeu,
       function(homeHtml){
-        var temp1 = getState(cat);
+        let temp1 = getState(cat);
         if(temp1!="-999"&& temp1!="-09")
         homeHtml=homeHtml.replace(new RegExp("{{data}}","g"),"Dear "+temp1.username+"!! This is a project page on which we are working!! By the way, your email id which is "+temp1.email+".");
         else if(temp1=="-09"){
@@ -86,7 +87,7 @@ dc.submit1 = function(a,b) {
   }
 
   function getState(data){
-    for(var x in data){
+    for(let x in data){
       if(data[x].username && data[x].username.split(",").indexOf(usr.toString())!=-1) {
         if(data[x].password && data[x].password.split(",").indexOf(pas.toString())!=-1) {
           return data[x];
@@ -98,7 +99,8 @@ dc.submit1 = function(a,b) {
     }
     return "-999";
   }
-  var arrOpenedDivs= document.querySelectorAll(".show");
+
+  let arrOpenedDivs= document.querySelectorAll(".show");
   for (i = 0; i < arrOpenedDivs.length; i++) {
       arrOpenedDivs[i].classList.remove('show');
   } 
@@ -120,8 +122,10 @@ dc.buildAndShowHomeHTML3 =function() {
   switchactive("#navaboutButton");
   $("#main-content").load(homeHtmlUrl3);
 };
-dc.buildindex=function(){
-  dc.buildAndShowHomeHTML();
+
+dc.buildAndShowHomeHTML4 =function() {
+  showLoading("#main-content");
+  $("#main-content").load(homeHtmlUrl4);
 };
 global.$dc = dc;
 

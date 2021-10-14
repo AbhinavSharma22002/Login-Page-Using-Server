@@ -1,11 +1,11 @@
 const fs = require('fs');
 const express = require('express');
 const fortunes = require(__dirname+'/../data/fortunes.json');
-
 const app = express();
-
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
+let nodemailer = require('nodemailer');
+
 
 app.get('/', (req, res) => {
   fs.readFile(__dirname+'/../index.html',function (err, data) {
@@ -201,17 +201,42 @@ const writeFortunes = json => {
   fs.writeFile(__dirname+'/../data/fortunes.json', JSON.stringify(json), err => console.log(err));
 };
 
-app.post('/process_pos', function (req, res) {  
-   var username = req.body.form1[0];
-   var password = req.body.form1[1];
-   var email = req.body.form1[2];
-   var latset= {"username":username,"password":password,"email":email};
-  const fortune_ids = fortunes.map(f => f.username);
+let username = "";
+let password = "";
+let email = "";
+let otp;
+//onclick="$dc.submit2(document.getElementById('u1'),document.getElementById('u2'),document.getElementById('u3'))"
+app.post('/process_pos', function (req, res) { 
+   username = req.body.username;
+  password = req.body.password;
+   email = req.body.email;
+  otp = Math.floor(100000 + Math.random() * 900000);
 
-  const new_fortunes = fortunes.concat(latset);
+   let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'jiofi22002@gmail.com',
+      pass: 'gudan123@2002'
+    }
+  });
+  
+  let mailOptions = {
+    from: 'jiofi22002@gmail.com',
+    to: `${email}`,
+    subject: 'Authentication OTP for faltu_sever',
+    text: `You're receiving this e-mail because you or someone else has requested for an account creation with this mail id and user name ${username}. Please use this otp ${otp}`
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
 
-  writeFortunes(new_fortunes);
-  fs.readFile(__dirname+'/../snippet/process_pos.html', function (err, data) {
+  
+  fs.readFile(__dirname+'/../process_pos.html', function (err, data) {
     if(err) console.log(err);
     res.writeHead(200,{'Content-Type':'text/html'});
     res.write(data);
@@ -219,4 +244,32 @@ app.post('/process_pos', function (req, res) {
   });
 });
 
+app.post('/check',(req,res)=>{
+
+  if(req.body.OTP===otp && otp!==Null){
+
+  let latset= {"username":username,"password":password,"email":email}; 
+  const fortune_ids = fortunes.map(f => f.username);
+
+  const new_fortunes = fortunes.concat(latset);
+
+  writeFortunes(new_fortunes);
+
+  fs.readFile(__dirname+'/../snippet/hel.html', function (err, data) {
+    if(err) console.log(err);
+    res.writeHead(200,{'Content-Type':'text/html'});
+    res.write(data);
+    res.end();
+  });
+  }
+  else{
+    fs.readFile(__dirname+'/../snippet/hel2.html', function (err, data) {
+      if(err) console.log(err);
+      res.writeHead(200,{'Content-Type':'text/html'});
+      res.write(data);
+      res.end();
+    });
+  }
+
+});
 module.exports = app;

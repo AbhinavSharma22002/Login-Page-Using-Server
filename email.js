@@ -10,9 +10,9 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
   from: 'jiofi22002@gmail.com',
-  to: 'vipin.kishore2012@gmail.com',
-  subject: 'Authentication Mail',
-  text: 'That was easy!'
+  to: 'Adeebzaidi121@gmail.com',
+  subject: 'Bhai h ky',
+  text: 'tu bhai h beta'
 };
 
 transporter.sendMail(mailOptions, function(error, info){

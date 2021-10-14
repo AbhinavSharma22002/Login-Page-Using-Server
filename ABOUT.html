@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+	
+<link rel="icon" href="/images/x-icon.ico">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faltu Server</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/styles.css">
+<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+</head>
+<script>
+	window.onload=function(){
+		$dc.buildAndShowHomeHTML3();
+};	
+</script>
+<body>
+<header>
+	<nav id="header-nav" class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+
+				<div class="navbar-brand">
+					<a href="/LOGIN.html" style="color: black; cursor: pointer;"><h1>BANK</h1></a>
+				</div>
+
+				<button id="navbarToggle" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false"  style="background-color: aliceblue;">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			 </div>
+
+			<div id="collapsable-nav" class="collapse navbar-collapse">
+				<ul id="nav-list" class="nav navbar-nav navbar-right"  style="background-color: aliceblue;">
+					<li id="navHomeButton">
+						<a href="/LOGIN.html">
+								<span class="glyphicon glyphicon-home"></span><br class="hidden-xs">Log In
+							</a>
+						</li>
+						<li id="navMenuButton">
+							
+								<a href="/SIGN.html">
+								<span class="glyphicon glyphicon-user"></span><br class="hidden-xs">Sign In
+							</a>
+						</li>
+						<li id="navaboutButton" class="active">
+							<a href="/ABOUT.html">
+								<span class="glyphicon glyphicon-info-sign"></span><br class="hidden-xs">About
+							</a>
+						</li>
+				</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+		<div id="main-content" class="container my-5"></div>
+		
+
+		<footer class="panel-footer">
+			<div class="container">
+				<div class="row">
+					<section id="hours" class="col-sm-4">
+						<span>HOURS:</span><br>
+						Sun-Thurs: 11:15am - 10:00pm<br>
+						Fri: 11:15am - 2:30pm<br>
+						Saturday Closed
+						<hr class="visible-xs">
+					</section>
+					<section id="address" class="col-sm-4">
+						<span>Address:</span><br>
+						********************<br>
+						****************
+						<hr class="visible-xs">
+					</section>
+					<section id="testimonials" class="col-sm-4">
+						<p>Hey! Its a project page.</p>
+					</section>
+				</div>
+				<div class="text-center">&copy; Copyright 2021</div>
+			</div>
+		</footer>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/ajax-utils.js"></script>
+		<script src="js/script.js"></script>
+		</body>
+	</html>
