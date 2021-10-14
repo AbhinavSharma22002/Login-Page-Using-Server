@@ -187,6 +187,17 @@ app.get('/images/img3.jpg', (req,res)=>{
   });
 });
 
+app.get('/snippet/process.html', (req,res)=>{
+  fs.readFile(__dirname+'/../snippet/process.html',function(err,data){
+    if(err) console.log(err);
+    res.writeHead(200,{'Content-Type':'text/html'});
+    res.write(data);
+    res.end();
+  });
+});
+
+
+
 
 app.get('/ABOUT.html', (req, res) => {
   fs.readFile(__dirname+'/../ABOUT.html', function (err, data) {
@@ -205,7 +216,6 @@ let username = "";
 let password = "";
 let email = "";
 let otp;
-//onclick="$dc.submit2(document.getElementById('u1'),document.getElementById('u2'),document.getElementById('u3'))"
 app.post('/process_pos', function (req, res) { 
    username = req.body.username;
   password = req.body.password;
@@ -245,31 +255,28 @@ app.post('/process_pos', function (req, res) {
 });
 
 app.post('/check',(req,res)=>{
-
-  if(req.body.OTP===otp && otp!==Null){
+  if(req.body.OTP==otp){
 
   let latset= {"username":username,"password":password,"email":email}; 
+
   const fortune_ids = fortunes.map(f => f.username);
 
   const new_fortunes = fortunes.concat(latset);
 
   writeFortunes(new_fortunes);
 
-  fs.readFile(__dirname+'/../snippet/hel.html', function (err, data) {
+  y = "successfully submitted!!!";
+  }
+  else{
+    y = "not submitted!!";
+  }
+
+  fs.readFile(__dirname+'/../snippet/check.html', function (err, data) {
     if(err) console.log(err);
     res.writeHead(200,{'Content-Type':'text/html'});
     res.write(data);
     res.end();
   });
-  }
-  else{
-    fs.readFile(__dirname+'/../snippet/hel2.html', function (err, data) {
-      if(err) console.log(err);
-      res.writeHead(200,{'Content-Type':'text/html'});
-      res.write(data);
-      res.end();
-    });
-  }
 
 });
 module.exports = app;
