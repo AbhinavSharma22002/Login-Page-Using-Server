@@ -5,6 +5,10 @@ const app = express();
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
 let nodemailer = require('nodemailer');
+const MongoClient = require('mongodb').MongoClient;
+const Db = 'mongodb+srv://abhinav_22002:abhi1232002@cluster0.y0xrk.mongodb.net/E-commerce_Site?retryWrites=true&w=majority'
+
+
 
 
 app.get('/', (req, res) => {
@@ -210,6 +214,16 @@ app.get('/ABOUT.html', (req, res) => {
 
 const writeFortunes = json => {
   fs.writeFile(__dirname+'/../data/fortunes.json', JSON.stringify(json), err => console.log(err));
+  
+  // MongoClient.connect(Db,function(err,db){
+  //     if(err) throw err;
+  //     let dbo= db.db("E-commerce_Site");
+  //     dbo.collection("dataofuser").insertOne(json,function(err,res){
+  //         if(err) throw err;
+  //         console.log("1 document inserted");
+  //         db.close();
+  //     });
+  // });
 };
 
 let username = "";
