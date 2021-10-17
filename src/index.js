@@ -1,6 +1,6 @@
 const fs = require('fs');
 const express = require('express');
-const fortunes = require(__dirname+'/../data/fortunes.json');
+// const fortunes = require(__dirname+'/../data/fortunes.json');
 const app = express();
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
@@ -90,14 +90,14 @@ app.get('/images/ajax-loader.gif', (req,res)=>{
 });
 
 
-app.get('/data/fortunes.json', (req,res)=>{
-  fs.readFile(__dirname+'/../data/fortunes.json', 'utf-8', (err, data) => {
-    if (err) throw err;
-    req.responseText=JSON.parse(data);
-    res.write(data);
-    res.end();
-  });
-});
+// app.get('/data/fortunes.json', (req,res)=>{
+//   fs.readFile(__dirname+'/../data/fortunes.json', 'utf-8', (err, data) => {
+//     if (err) throw err;
+//     req.responseText=JSON.parse(data);
+//     res.write(data);
+//     res.end();
+//   });
+// });
 
 app.get('/fonts/glyphicons-halflings-regular.woff2', (req,res)=>{
   fs.readFile(__dirname+'/../fonts/glyphicons-halflings-regular.woff2',function(err,data){
@@ -213,8 +213,6 @@ app.get('/ABOUT.html', (req, res) => {
 });
 
 const writeFortunes = json => {
-  // fs.writeFile(__dirname+'/../data/fortunes.json', JSON.stringify(json), err => console.log(err));
-  // console.log(json);
   MongoClient.connect(Db,function(err,db){
       if(err) throw err;
       let dbo= db.db("User_Info");
@@ -288,6 +286,7 @@ app.post('/check',(req,res)=>{
   }
 
   fs.readFile(__dirname+'/../snippet/check.html', function (err, data) {
+    data = data.toString().replace(new RegExp("{{data}}", "g"), y);
     if(err) console.log(err);
     res.writeHead(200,{'Content-Type':'text/html'});
     res.write(data);
@@ -299,23 +298,18 @@ app.post('/check',(req,res)=>{
 
 
 app.post('/process_pos1', function (req, res) { 
-  let u = req.body.username;
-   let p = req.body.password;
-
-   console.log(u+"   "+p);
-
-   MongoClient.connect(Db, function(err, db) {
+ fs.readFile(__dirname+'/../snippet/process_pos1.html', function (err, data) {
+  if(err) console.log(err);
+  MongoClient.connect(Db, function(err, db) {
     if (err) throw err;
     var dbo = db.db("User_Info");
-    dbo.collection("User").findOne({"username":`${u}`}, function(err, result) {
+    dbo.collection("User").findOne({"username":`${req.body.username}`,"password":`${req.body.password}`}, function(err, result) {
       if (err) throw err;
       console.log(result);
+      // data = data.toString().replace(new RegExp("{{data}}", "g"), "Welcome you have sucessfully Logged in. Your email id is "+e);
       db.close();
     });
   });
- 
- fs.readFile(__dirname+'/../snippet/process_pos1.html', function (err, data) {
-   if(err) console.log(err);
    res.writeHead(200,{'Content-Type':'text/html'});
    res.write(data);
    res.end();
