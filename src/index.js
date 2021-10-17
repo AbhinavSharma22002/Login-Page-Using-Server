@@ -1,7 +1,12 @@
 const fs = require('fs');
 const express = require('express');
-// const fortunes = require(__dirname+'/../data/fortunes.json');
+const session = require('express-session');
 const app = express();
+app.use(session({
+  secret:'key that will sign cookie',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
 let nodemailer = require('nodemailer');
@@ -12,6 +17,8 @@ const Db = 'mongodb+srv://abhinav_22002:gudan1232002@cluster0.y0xrk.mongodb.net/
 
 
 app.get('/', (req, res) => {
+  console.log(req.session);
+  console.log(req.session.id);
   fs.readFile(__dirname+'/../index.html',function (err, data) {
     if(err) console.log(err);
     res.writeHead(200,{'Content-Type':'text/html'});
@@ -278,17 +285,17 @@ app.post('/check',(req,res)=>{
 app.get('/logout',function(req,res){
 
   
-  MongoClient.connect(Db, function(err, db) {
-    if (err) throw err;
-    let dbo = db.db("User_Info");
-    let myquery = {};
-    let newvalues = {$set: {username:`${}`,password:`${}`,email:`${}`,active:`${}`} };
-    dbo.collection("User").updateOne(myquery, newvalues, function(err, res) {
-      if (err) throw err;
-      console.log("1 document updated");
-      db.close();
-    });
-  });
+  // MongoClient.connect(Db, function(err, db) {
+  //   if (err) throw err;
+  //   let dbo = db.db("User_Info");
+  //   let myquery = {};
+  //   let newvalues = {$set: {username:`${}`,password:`${}`,email:`${}`,active:`${}`} };
+  //   dbo.collection("User").updateOne(myquery, newvalues, function(err, res) {
+  //     if (err) throw err;
+  //     console.log("1 document updated");
+  //     db.close();
+  //   });
+  // });
   fs.readFile(__dirname+'/../snippet/logout.html', function (err, data) {
     if(err) console.log(err);
     res.writeHead(200,{'Content-Type':'text/html'});
@@ -317,4 +324,15 @@ app.post('/process_pos1', function (req, res) {
  });
 });
 
+const jwt = require('jsonwebtoken');
+const createToken = async()=>{
+  const token = await jwt.sign({_id:"616be7adc80ccedb75e81fd8"},"ghalsdgnsadkfnsaldhflsadnoiashfdhdgasndf",{
+    expiresIn:"2 seconds"
+  });
+console.log(token);
+const usever = await jwt.verify(token, "ghalsdgnsadkfnsaldhflsadnoiashfdhdgasndf");
+
+console.log(usever);
+};
+createToken();
 module.exports = app;
