@@ -1,19 +1,19 @@
 <div class="jumbotron">
   <div class="headbox text-center">Log In</div>
   <div class="content">
-    <form>
+    <form name="form1" action="/process_pos1" method="POST">
 <table align=center cellspacing=10>
 <tr>
-<td><input type="text" id="u1" style="color: #000000; border-radius: 4px;font-weight: 700;" aria-label="User" placeholder="User" required></td>
+<td><input type="text" name="username" id="u1" style="color: #000000; border-radius: 4px;font-weight: 700;" aria-label="User" placeholder="User" required></td>
 </tr>
 
 <tr>
-<td><input type="password" id="u2" style="color: #000000; border-radius: 4px;font-weight: 700;" aria-label="Password" placeholder="Password" required></td>
+<td><input type="password" name="password" id="u2" style="color: #000000; border-radius: 4px;font-weight: 700;" aria-label="Password" placeholder="Password" required></td>
 </tr>
 
 </table>
 <div align="center">
-<button data-element="submit" style="display:inline-block; color: #fff; background-color:#000000; border-radius: 5px; font-weight: 700;" onclick="$dc.submit1(document.getElementById('u1'),document.getElementById('u2'))">
+<button data-element="submit" style="display:inline-block; color: #fff; background-color:#000000; border-radius: 5px; font-weight: 700;" >
 <span>Enter</span>
 </button>
 </div>

@@ -14,8 +14,6 @@ let homeHtmlUrl = "../snippet/home-snippet.html";
 let homeHtmlUrl2 = "../snippet/home-snippet-2.html";
 let homeHtmlUrl3 = "../snippet/home-snippet-3.html";
 let homeHtmlUrl4 = "../snippet/process.html";
-let homeu="../snippet/home.html";
-let data="../data/fortunes.json";
 
 let insertHtml = function (selector, html) {
   let targetElem = document.querySelector(selector);
@@ -52,53 +50,53 @@ let switchactive = function(a) {
   document.querySelector(a).className="active";
 };
 
-let usr;
-let pas;
-let ema;
-dc.submit1 = function(a,b) {
-  showLoading("#main-content");
-  usr=a.value;
-  pas=b.value;
-  $ajaxUtils.sendGetRequest1(
-    data,
-    searchandshow,
-    true);
-  };
+// let usr;
+// let pas;
+// let ema;
+// dc.submit1 = function(a,b) {
+//   showLoading("#main-content");
+//   usr=a.value;
+//   pas=b.value;
+//   $ajaxUtils.sendGetRequest1(
+//     data,
+//     searchandshow,
+//     true);
+//   };
 
-  function searchandshow(cat){
-    $ajaxUtils.sendGetRequest1(
-      homeu,
-      function(homeHtml){
-        let temp1 = getState(cat);
-        if(temp1!="-999"&& temp1!="-09")
-        homeHtml=homeHtml.replace(new RegExp("{{data}}","g"),"Dear "+temp1.username+"!! This is a project page on which we are working!! By the way, your email id which is "+temp1.email+".");
-        else if(temp1=="-09"){
-        alert("Entered Wrong Password. Please try again!!");
-        dc.buildAndShowHomeHTML();
-        }
-        else{
-        alert("No data found");
-        dc.buildAndShowHomeHTML();
-        }
-        insertHtml('#main-content', homeHtml);
-      },
-      false
-    );
-  }
+//   function searchandshow(cat){
+//     $ajaxUtils.sendGetRequest1(
+//       homeu,
+//       function(homeHtml){
+//         let temp1 = getState(cat);
+//         if(temp1!="-999"&& temp1!="-09")
+//         homeHtml=homeHtml.replace(new RegExp("{{data}}","g"),"Dear "+temp1.username+"!! This is a project page on which we are working!! By the way, your email id which is "+temp1.email+".");
+//         else if(temp1=="-09"){
+//         alert("Entered Wrong Password. Please try again!!");
+//         dc.buildAndShowHomeHTML();
+//         }
+//         else{
+//         alert("No data found");
+//         dc.buildAndShowHomeHTML();
+//         }
+//         insertHtml('#main-content', homeHtml);
+//       },
+//       false
+//     );
+//   }
 
-  function getState(data){
-    for(let x in data){
-      if(data[x].username && data[x].username.split(",").indexOf(usr.toString())!=-1) {
-        if(data[x].password && data[x].password.split(",").indexOf(pas.toString())!=-1) {
-          return data[x];
-        }
-        else{
-          return "-09";
-        }
-      }
-    }
-    return "-999";
-  }
+//   function getState(data){
+//     for(let x in data){
+//       if(data[x].username && data[x].username.split(",").indexOf(usr.toString())!=-1) {
+//         if(data[x].password && data[x].password.split(",").indexOf(pas.toString())!=-1) {
+//           return data[x];
+//         }
+//         else{
+//           return "-09";
+//         }
+//       }
+//     }
+//     return "-999";
+//   }
 
   let arrOpenedDivs= document.querySelectorAll(".show");
   for (i = 0; i < arrOpenedDivs.length; i++) {
