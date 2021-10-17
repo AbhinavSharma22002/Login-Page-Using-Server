@@ -6,7 +6,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 let nodemailer = require('nodemailer');
 const MongoClient = require('mongodb').MongoClient;
-const Db = 'mongodb+srv://abhinav_22002:g@cluster0.y0xrk.mongodb.net/User_Info?retryWrites=true&w=majority';
+const Db = 'mongodb+srv://abhinav_22002:gudan1232002@cluster0.y0xrk.mongodb.net/User_Info?retryWrites=true&w=majority';
 
 
 
@@ -208,7 +208,7 @@ const writeFortunes = json => {
       let dbo= db.db("User_Info");
       dbo.collection("User").insertOne(json,function(err,res){
           if(err) throw err;
-          console.log("1 document inserted");
+          // console.log("1 document inserted");
           db.close();
       });
   });
@@ -221,15 +221,15 @@ let email = "";
 let otp;
 app.post('/process_pos', function (req, res) { 
    username = req.body.username;
-  password = req.body.password;
+   password = req.body.password;
    email = req.body.email;
-  otp = Math.floor(100000 + Math.random() * 900000);
+   otp = Math.floor(100000 + Math.random() * 900000);
 
    let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'jiofi22002@gmail.com',
-      pass: ''
+      pass: 'vipin321@2002'
     }
   });
   
@@ -247,8 +247,6 @@ app.post('/process_pos', function (req, res) {
       console.log('Email sent: ' + info.response);
     }
   });
-
-  //onclick="$dc.submit1(document.getElementById('u1'),document.getElementById('u2'))"
   fs.readFile(__dirname+'/../process_pos.html', function (err, data) {
     if(err) console.log(err);
     res.writeHead(200,{'Content-Type':'text/html'});
@@ -259,16 +257,8 @@ app.post('/process_pos', function (req, res) {
 
 app.post('/check',(req,res)=>{
   if(req.body.OTP==otp){
-
   let latset= {"username":username,"password":password,"email":email}; 
-
-  // const fortune_ids = fortunes.map(f => f.username);
-
-  // const new_fortunes = fortunes.concat(latset);
-  // console.log(new_fortunes);
-
   writeFortunes(latset);
-
   y = "successfully submitted!!!";
   }
   else{
@@ -285,7 +275,27 @@ app.post('/check',(req,res)=>{
 
 });
 
+app.get('/logout',function(req,res){
 
+  
+  MongoClient.connect(Db, function(err, db) {
+    if (err) throw err;
+    let dbo = db.db("User_Info");
+    let myquery = {};
+    let newvalues = {$set: {username:`${}`,password:`${}`,email:`${}`,active:`${}`} };
+    dbo.collection("User").updateOne(myquery, newvalues, function(err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+      db.close();
+    });
+  });
+  fs.readFile(__dirname+'/../snippet/logout.html', function (err, data) {
+    if(err) console.log(err);
+    res.writeHead(200,{'Content-Type':'text/html'});
+    res.write(data);
+    res.end();
+  });
+});
 
 app.post('/process_pos1', function (req, res) { 
  fs.readFile(__dirname+'/../snippet/process_pos1.html', function (err, data) {
@@ -295,14 +305,15 @@ app.post('/process_pos1', function (req, res) {
     var dbo = db.db("User_Info");
     dbo.collection("User").findOne({"username":`${req.body.username}`,"password":`${req.body.password}`}, function(err, result) {
       if (err) throw err;
-      console.log(result);
-      // data = data.toString().replace(new RegExp("{{data}}", "g"), "Welcome you have sucessfully Logged in. Your email id is "+e);
+      let e = result.email;
+      data = data.toString().replace(new RegExp("{{data}}", "g"), "Welcome you have sucessfully Logged in. Your email id is "+e);
+      
+   res.writeHead(200,{'Content-Type':'text/html'});
+   res.write(data);
+   res.end(); 
       db.close();
     });
   });
-   res.writeHead(200,{'Content-Type':'text/html'});
-   res.write(data);
-   res.end();
  });
 });
 
