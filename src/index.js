@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 let nodemailer = require('nodemailer');
 const MongoClient = require('mongodb').MongoClient;
-const Db = 'mongodb+srv://abhinav_22002:gudan1232002@cluster0.y0xrk.mongodb.net/User_Info?retryWrites=true&w=majority';
+const Db = 'mongodb+srv://abhinav_22002:@cluster0.y0xrk.mongodb.net/User_Info?retryWrites=true&w=majority';
 
 
 
@@ -236,7 +236,7 @@ app.post('/process_pos', function (req, res) {
     service: 'gmail',
     auth: {
       user: 'jiofi22002@gmail.com',
-      pass: 'vipin321@2002'
+      pass: ''
     }
   });
   
