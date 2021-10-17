@@ -6,7 +6,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 let nodemailer = require('nodemailer');
 const MongoClient = require('mongodb').MongoClient;
-const Db = 'mongodb+srv://abhinav_22002:gudan1232002@cluster0.y0xrk.mongodb.net/User_Info?retryWrites=true&w=majority';
+const Db = 'mongodb+srv://abhinav_22002:g@cluster0.y0xrk.mongodb.net/User_Info?retryWrites=true&w=majority';
 
 
 
@@ -88,16 +88,6 @@ app.get('/images/ajax-loader.gif', (req,res)=>{
     res.end();
   });
 });
-
-
-// app.get('/data/fortunes.json', (req,res)=>{
-//   fs.readFile(__dirname+'/../data/fortunes.json', 'utf-8', (err, data) => {
-//     if (err) throw err;
-//     req.responseText=JSON.parse(data);
-//     res.write(data);
-//     res.end();
-//   });
-// });
 
 app.get('/fonts/glyphicons-halflings-regular.woff2', (req,res)=>{
   fs.readFile(__dirname+'/../fonts/glyphicons-halflings-regular.woff2',function(err,data){
@@ -239,7 +229,7 @@ app.post('/process_pos', function (req, res) {
     service: 'gmail',
     auth: {
       user: 'jiofi22002@gmail.com',
-      pass: 'vipin321@2002'
+      pass: ''
     }
   });
   
